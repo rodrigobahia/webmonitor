@@ -123,7 +123,7 @@ class HomeController extends Controller
                     'text' => $result,
                     'chat_id' => env('TELEGRAM_CHAT_ID')
                 ];
-                
+
                 //Send message telegram
                 file_get_contents("https://api.telegram.org/bot$token/sendMessage?" . http_build_query($data) );
 
