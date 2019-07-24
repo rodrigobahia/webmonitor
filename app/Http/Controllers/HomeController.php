@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
+use App\Site;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        //Get sites
+        $sites = Site::where('user_id',auth()->user()->id)->orderBy('name')->get();
+
+        //Read sites to get status
+        foreach($sites as $site){
+
+            if($socket =@ fsockopen($site->url, $site->port, $errno, $errstr, 30)) {
+
+                $site->status = 'online';
+                
+            } else {
+
+                $site->status = 'offline';
+
+            }
+            
+        }
+        //End read sites to get status
+
+        return view('home',['sites'=>$sites]);
     }
 }
