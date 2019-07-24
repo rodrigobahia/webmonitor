@@ -20,7 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //SITES
-Route::get('/sites/create','SiteController@create');
-Route::post('/sites/store','SiteController@store');
-Route::get('/siter/edit','SiteController@edit')->name('sites.edit');
-Route::get('/siter/destroy','SiteController@destroy')->name('sites.destroy');
+Route::get('/sites/create','SiteController@create')->name('sites.create');
+Route::post('/sites/store','SiteController@store')->name('sites.store');
+Route::post('/sites/update/{id}','SiteController@update')->name('sites.update');
+Route::get('/sites/edit/{id}','SiteController@edit')->name('sites.edit');
+Route::delete('/siter/destroy/{id}','SiteController@destroy')->name('sites.destroy');

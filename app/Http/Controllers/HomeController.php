@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
 
         //Get sites
-        $sites = Site::where('user_id',auth()->user()->id)->get();
+        $sites = Site::where('user_id',auth()->user()->id)->orderBy('name')->get();
 
         return view('home',['sites'=>$sites]);
     }

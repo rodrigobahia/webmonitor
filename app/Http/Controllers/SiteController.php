@@ -48,7 +48,7 @@ class SiteController extends Controller
         ]);
 
         //Return
-        return view('home');
+        return redirect()->route('home');
         
     }
 
@@ -69,9 +69,14 @@ class SiteController extends Controller
      * @param  \App\Site  $site
      * @return \Illuminate\Http\Response
      */
-    public function edit(Site $site)
+    public function edit($id)
     {
-        //
+        //Find site
+        $site = Site::find($id);
+
+        //Return
+        return view('pages.sites.edit',['site'=>$site]);
+
     }
 
     /**
@@ -81,9 +86,11 @@ class SiteController extends Controller
      * @param  \App\Site  $site
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Site $site)
+    public function update(Request $request, $id)
     {
-        //
+        $site = Site::findOrFail($id);
+        $site->update($request->all());
+        return redirect()->route('home');
     }
 
     /**
@@ -92,8 +99,9 @@ class SiteController extends Controller
      * @param  \App\Site  $site
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Site $site)
+    public function destroy($id)
     {
-        //
+        $site = Site::destroy($id);
+        return redirect()->route('home');
     }
 }
