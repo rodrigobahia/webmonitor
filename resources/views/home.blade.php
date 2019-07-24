@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     Your Sites
-                    <a href="/sites/add"><button class="btn-new">New Site</button></a>
+                    <a href="/sites/create"><button class="btn-new">New Site</button></a>
                 </div>
 
                 <div class="card-body">
@@ -31,7 +31,8 @@
                                 <td>{{ $site->port }}</td>
                                 <td></td>
                                 <td>
-                                    <a href="{{ route('sites.edit', $site->id) }}" class="btn btn-default">Edit</a>
+                                <a href="{{$site->url}}" target="_blank" class="btn btn-light">View</a>
+                                    <a href="{{ route('sites.edit', $site->id) }}" class="btn btn-secondary">Edit</a>
                                     <form action="{{ route('sites.destroy', $site->id) }}" method="POST"
                                             style="display: inline"
                                             onsubmit="return confirm('Are you sure?');">

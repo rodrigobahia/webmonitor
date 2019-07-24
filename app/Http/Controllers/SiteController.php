@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Site;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,7 @@ class SiteController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.sites.create');
     }
 
     /**
@@ -35,7 +36,20 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //Save new site
+        $site = Site::create([
+            'name' => $request->input('name'),
+            'url' => $request->input('url'),
+            'port' => $request->input('port'),
+            'user_id' => auth()->user()->id,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        //Return
+        return view('home');
+        
     }
 
     /**
