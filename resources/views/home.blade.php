@@ -29,7 +29,13 @@
                                 <td>{{ $site->name }}</td>
                                 <td>{{ $site->url }}</td>
                                 <td>{{ $site->port }}</td>
-                                <td></td>
+                                <td>
+                                    @if ($site->status == 'online')
+                                        <span class="badge badge-success">Online</span>
+                                    @else  
+                                        <span class="badge badge-danger">Offline</span>
+                                    @endif
+                                </td>
                                 <td>
                                 <a href="{{$site->url}}" target="_blank" class="btn btn-light">View</a>
                                     <a href="{{ route('sites.edit', $site->id) }}" class="btn btn-secondary">Edit</a>
