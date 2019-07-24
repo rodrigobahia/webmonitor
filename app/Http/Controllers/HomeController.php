@@ -116,14 +116,14 @@ class HomeController extends Controller
             if ($offlineCount > 0){
 
                 //Define token telegram
-                $token = "931778424:AAEnDwSRc4OvWOzUiVHBlNhO3eWq8bKVxUQ";
+                $token = env('TELEGRAM_TOKEN');
 
                 //Define message telegram
                 $data = [
                     'text' => $result,
-                    'chat_id' => '179077351'
+                    'chat_id' => env('TELEGRAM_CHAT_ID')
                 ];
-
+                
                 //Send message telegram
                 file_get_contents("https://api.telegram.org/bot$token/sendMessage?" . http_build_query($data) );
 
