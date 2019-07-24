@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['status']]);
     }
 
     /**
@@ -38,31 +38,14 @@ class HomeController extends Controller
 
                 $site->status = 'online';
                 
-                $result .= $site->name;
-                $result .= " = Online";
-                $result .= "\n";
-                
             } else {
 
                 $site->status = 'offline';
-                
-                $result .= $site->name;
-                $result .= "Offline";
-                $result .= "\n";
 
             }
             
         }
         //End read sites to get status
-
-        $token = "931778424:AAEnDwSRc4OvWOzUiVHBlNhO3eWq8bKVxUQ";
-
-        $data = [
-            'text' => $result,
-            'chat_id' => '179077351'
-        ];
-
-        file_get_contents("https://api.telegram.org/bot$token/sendMessage?" . http_build_query($data) );
 
         return view('home',['sites'=>$sites]);
     }
@@ -126,6 +109,8 @@ class HomeController extends Controller
 
                 //Send message telegram
                 file_get_contents("https://api.telegram.org/bot$token/sendMessage?" . http_build_query($data) );
+
+            } else {
 
             }
             //End Validate offline count    
